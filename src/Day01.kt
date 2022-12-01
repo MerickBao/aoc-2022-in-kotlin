@@ -1,10 +1,37 @@
+import java.util.PriorityQueue
+
 fun main() {
     fun part1(input: List<String>): Int {
-        return input.size
+        var ans = 0
+        var now = 0
+        for (s in input) {
+            if (s.equals("")) {
+                ans = Math.max(ans, now)
+                now = 0
+            } else {
+                now += s.toInt()
+            }
+        }
+        return Math.max(ans, now)
     }
 
     fun part2(input: List<String>): Int {
-        return input.size
+        val all = mutableListOf<Int>()
+        var now = 0
+        for (s in input) {
+            if (s.equals("")) {
+                all.add(now)
+                now = 0
+            } else {
+                now += s.toInt()
+            }
+        }
+        all.sort()
+        var ans = 0
+        for (i in all.size - 1 downTo all.size - 3) {
+            ans += all[i]
+        }
+        return ans
     }
 
     // test if implementation meets criteria from the description, like:
